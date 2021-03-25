@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 /**
  * Ensures the app can be served as an embedded app by preventing Spring from writing the X-Frame-Options header.
  * Since WebSecurityConfigurerAdapter applies the HeadersConfigurer by default, no configuration is necessary.
- * 
+ *
  * @author N F
  *
  */
@@ -18,26 +18,24 @@ public class ShopifyHeaders implements HttpSecurityBuilderConfigurerDelegate {
 
 	@Override
 	public void applyShopifyConfig(HttpSecurityBuilder<?> http) {
-		
-		
+
+
 	}
-	
+
 	/**
 	 * Disable the XFrameOptionsHeaderWriter, which prevents the X-Frame-Options header from being added.
-	 * 
+	 *
 	 * @param http The HttpSecurityBuilder
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void applyShopifyInit(HttpSecurityBuilder<?> http) {
 		logger.debug("Applying ShopifyHeaders init");
-		HeadersConfigurer<?> configurer = new HeadersConfigurer<>();				
-		configurer = http.getConfigurer(configurer.getClass());
-		
-		if (configurer == null) {
-			throw new RuntimeException("HeadersConfigurer is required");
+		HeadersConfigurer<?> configurer = http.getConfigurer(HeadersConfigurer.class);
+
+		if (configurer != null) {
+			configurer.frameOptions().disable();
 		}
-		configurer.frameOptions().disable();
 	}
 
 }
