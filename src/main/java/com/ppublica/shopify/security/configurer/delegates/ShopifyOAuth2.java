@@ -48,7 +48,7 @@ public class ShopifyOAuth2 implements HttpSecurityBuilderConfigurerDelegate {
 	}
 
 	@Override
-	public void applyShopifyConfig(HttpSecurityBuilder<?> http) {
+	public void applyShopifyInit(HttpSecurityBuilder<?> http) {
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class ShopifyOAuth2 implements HttpSecurityBuilderConfigurerDelegate {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void applyShopifyInit(HttpSecurityBuilder<?> http) {
+	public void applyShopifyConfig(HttpSecurityBuilder<?> http) {
 		logger.debug("Applying ShopifyOAuth2 init");
 		OAuth2LoginConfigurer<HttpSecurity> configurer = new OAuth2LoginConfigurer<HttpSecurity>();
 
